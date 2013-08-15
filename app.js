@@ -1,19 +1,26 @@
 
 function SearchCntl($scope, $http) {
+	// initialize phonebook API key and app name.
+	// NOTE: you have to go get your own API key and keep it private.
 	$scope.appName = getAPIAppName();
 	$scope.appKey = getAPIKey();
 
+	// Initialize values for which fields of mozillians.org can be searched
 	$scope.fieldNames = [ 'ircname', 'city', 'email', 'skills', 'languages', 'country', 'groups' ];
 	$scope.searchField = 'city';
 	$scope.searchString = 'brighton';
 
+	// Initialize values for dynamic filtering of mozillians by summit location
 	$scope.summitLocations = [ 'Santa Clara', 'Toronto', 'Brussels' ];
 	$scope.summitLocation = 'Santa Clara';
-	
+
+	// Initialize the stem of all searches for this API key and app name
+	// use JSONP to get around lack of CORS (see https://bugzilla.mozilla.org/show_bug.cgi?id=905672)
+	// for API docs see https://wiki.mozilla.org/Mozillians/API-Specification/List_Users/
 	$scope.searchStem = 'https://mozillians.org/api/v1/users/?&limit=500&format=jsonp&callback=JSON_CALLBACK&app_name=' + $scope.appName + '&app_key=' + $scope.appKey;
 
-	// https://wiki.mozilla.org/Mozillians/API-Specification/List_Users/
 
+	// Create search URL by combining stem with an array of key/value pairs representing HTTP GET arguments
 	function getSearchURL(inParams) {
 		var searchURL = $scope.searchStem;
 
@@ -24,8 +31,12 @@ function SearchCntl($scope, $http) {
 		return searchURL;
 	}
 
+	// Initialize the summit location map
+	// NOTE: this information is not public and is therefore withheld from this github repo.
 	$scope.locationMap = locationMap();
 
+	// Invoke the mozillians.org phonebook API, searching for people whose field has the specified value
+	// Upon getting back results, add summit_location field using the global locationMap
 	$scope.search = function(userName) {
 		var params = {};
 		params[$scope.searchField] = $scope.searchString;
