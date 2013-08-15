@@ -19,6 +19,8 @@ function SearchCntl($scope, $http) {
 		return searchURL;
 	}
 
+	$scope.locationMap = locationMap();
+
 	$scope.search = function(userName) {
 		var params = {};
 		params[$scope.searchField] = $scope.searchString;

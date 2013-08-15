@@ -35,19 +35,6 @@
 
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label for="appName" class="col-lg-2 control-label">appName</label>
-                                <div class="col-lg-10">
-                                <input type="text" class="form-control" id="appName" ng-model="appName" />
-                                </div>
-                            </div>                        
-                            <div class="form-group">
-                                <label for="appName" class="col-lg-2 control-label">appKey</label>
-                                <div class="col-lg-10">
-                                <input type="text" class="form-control" id="appKey" ng-model="appKey" />
-                                </div>
-                            </div>                        
-
-                            <div class="form-group">
                                 <label for="searchString" class="col-lg-2 control-label">Search</label>
                                 <div class="col-lg-10">
                                 <input type="text" class="form-control" id="searchString" ng-model="searchString" />
@@ -82,6 +69,7 @@
                             <img ng-show='!object.photo' src='./icon-48.png' height='48px' />
                             <img ng-show='object.photo' src='{{object.photo}}' height='48px' />
                             {{object.full_name}} {{object.email}}
+                            <strong ng-show='locationMap[object.full_name]'>{{locationMap[object.full_name]}}</strong>
                         </div>
                     </div>
                 </div>
@@ -101,6 +89,7 @@
         
         <!-- JS code for this app -->
         <script src="apikey-real.js"></script>            
+        <script src="locationMap.js"></script>            
         <script src="app.js"></script>            
 
     </body>
