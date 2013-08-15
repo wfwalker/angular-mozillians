@@ -1,0 +1,106 @@
+<!doctype html>
+<html ng-app>
+    <head>
+        <title>angularMozillians</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">        
+    </head>
+
+    <body style='padding-top: 70px'>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">angular-mozillians</a>
+                <div class="nav-collapse collapse">
+                  <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                  </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <div class='container'>
+            <div class='row'>
+                <div ng-controller="SearchCntl">
+                    <div class='col-md-6'>
+                        Mozillians.org
+
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="appName" class="col-lg-2 control-label">appName</label>
+                                <div class="col-lg-10">
+                                <input type="text" class="form-control" id="appName" ng-model="appName" />
+                                </div>
+                            </div>                        
+                            <div class="form-group">
+                                <label for="appName" class="col-lg-2 control-label">appKey</label>
+                                <div class="col-lg-10">
+                                <input type="text" class="form-control" id="appKey" ng-model="appKey" />
+                                </div>
+                            </div>                        
+
+                            <div class="form-group">
+                                <label for="searchString" class="col-lg-2 control-label">Search</label>
+                                <div class="col-lg-10">
+                                <input type="text" class="form-control" id="searchString" ng-model="searchString" />
+                                </div>
+                            </div>                        
+
+                            <div class="form-group">
+                                <label for="searchField" class="col-lg-2 control-label">Field</label>
+                                <div class="col-lg-10">
+                                <select ng-model="searchField" ng-options="fieldName for fieldName in fieldNames">
+                                </select>               
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button ng-click="search(searchString)" class="btn btn-default">Search</button>
+                                </div>
+                            </div>                        
+                        </form>
+
+                        <div><a target='_blank' href='{{searchURL}}'>RAW</a></div>
+                    </div>
+
+                    <div class='col-md-6'>
+                        <div>
+                            Found {{results.meta.total_count || 0}}
+                            <span ng-show='results.meta.total_count==1'>person</span>
+                            <span ng-show='results.meta.total_count!=1'>people</span>
+                        </div>
+                        <div ng-repeat='object in results.objects'>
+                            <img ng-show='!object.photo' src='./icon-48.png' height='48px' />
+                            <img ng-show='object.photo' src='{{object.photo}}' height='48px' />
+                            {{object.full_name}} {{object.email}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="http://code.angularjs.org/1.2.0rc1/angular.min.js"></script>
+        <script src="http://code.angularjs.org/1.2.0rc1/angular-resource.min.js"></script>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="./bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+        <script src="./bootstrap/js/respond.js"></script>    
+        
+        <!-- JS code for this app -->
+        <script src="apikey.js"></script>            
+        <script src="app.js"></script>            
+
+    </body>
+</html>
