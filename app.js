@@ -2,10 +2,15 @@
 function SearchCntl($scope, $http) {
 	$scope.appName = getAPIAppName();
 	$scope.appKey = getAPIKey();
+
 	$scope.fieldNames = [ 'ircname', 'city', 'email', 'skills', 'languages', 'country', 'groups' ];
 	$scope.searchField = 'city';
 	$scope.searchString = 'brighton';
-	$scope.searchStem = 'https://mozillians.org/api/v1/users/?&format=jsonp&callback=JSON_CALLBACK&app_name=' + $scope.appName + '&app_key=' + $scope.appKey;
+
+	$scope.summitLocations = [ 'Santa Clara', 'Toronto', 'Brussels' ];
+	$scope.summitLocation = 'Santa Clara';
+	
+	$scope.searchStem = 'https://mozillians.org/api/v1/users/?&limit=500&format=jsonp&callback=JSON_CALLBACK&app_name=' + $scope.appName + '&app_key=' + $scope.appKey;
 
 	// https://wiki.mozilla.org/Mozillians/API-Specification/List_Users/
 
@@ -29,7 +34,16 @@ function SearchCntl($scope, $http) {
 
 	  	$http.jsonp($scope.searchURL).success(function(data) {
 			console.log("SUCCESS");
-			$scope.results = data;
+			$scope.people = data.objects;
+			$scope.meta = data.meta;
+
+			// pre-process the search results, adding summit locations where possible
+			for (var i in $scope.people) {
+				var person = $scope.people[i];
+				if ($scope.locationMap[person.full_name]) {
+					person.summit_location = locationMap[person.full_name];
+				}
+			}
 		}).error(function(data) {
 			console.log("FAIL");
 			console.log(data);
