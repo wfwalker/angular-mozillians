@@ -9,6 +9,7 @@ function SearchCntl($scope, $http) {
 	$scope.fieldNames = [ 'ircname', 'city', 'email', 'skills', 'languages', 'country', 'groups' ];
 	$scope.searchField = 'city';
 	$scope.searchString = 'brighton';
+	$scope.searchedString = 'Look for some';
 
 	// Initialize values for dynamic filtering of mozillians by summit location
 	$scope.summitLocations = [ 'Santa Clara', 'Toronto', 'Brussels' ];
@@ -42,9 +43,12 @@ function SearchCntl($scope, $http) {
 		params[$scope.searchField] = $scope.searchString;
 
     	$scope.searchURL = getSearchURL(params);
+    	$scope.searchedString = 'Searching for '+ $scope.searchString + ' ' + $scope.searchField;
 
 	  	$http.jsonp($scope.searchURL).success(function(data) {
 			console.log("SUCCESS");
+
+			$scope.searchedString = 'Found ' + data.meta.total_count + ' ' + $scope.searchString + ' ' + $scope.searchField;		
 			$scope.people = data.objects;
 			$scope.meta = data.meta;
 

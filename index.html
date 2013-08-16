@@ -31,24 +31,24 @@
             <div class='row'>
                 <div ng-controller="SearchCntl">
                     <div class='col-md-6'>
-                        <form class="form-horizontal" role="form">
+                        <form role="form">
                             <div class="form-group">
-                                <label for="searchField" class="col-lg-2 control-label">Field</label>
-                                <div class="col-lg-10">
+                                <label for="searchField" class="control-label">Field</label>
+                                <div>
                                 <select ng-model="searchField" ng-options="fieldName for fieldName in fieldNames">
                                 </select>               
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="searchString" class="col-lg-2 control-label">Value</label>
-                                <div class="col-lg-10">
+                                <label for="searchString" class="control-label">Value</label>
+                                <div>
                                 <input type="text" class="form-control" id="searchString" ng-model="searchString" />
                                 </div>
                             </div>                        
 
                             <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
+                                <div>
                                     <button ng-click="search(searchString)" class="btn btn-default">Search</button>
                                     (<a target='_blank' href='{{searchURL}}'>raw</a>)
                                 </div>
@@ -60,13 +60,12 @@
 
                     <div class='col-md-6'>
                         <div>
-                            Found {{meta.total_count || 0}}
+                            {{searchedString}}
                             <span ng-show='meta.total_count==1'>person</span>
                             <span ng-show='meta.total_count!=1'>people</span>, view for 
                             <select ng-model="summitLocation" ng-options="summitLocation for summitLocation in summitLocations">
                                 <option value="">All</option>
                             </select>               
-
                         </div>
                         <hr />
                         <div ng-repeat='person in people | filter: {summit_location: summitLocation}' style='padding-bottom: 1px'>
