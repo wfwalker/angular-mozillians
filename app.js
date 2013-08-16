@@ -25,6 +25,11 @@ function SearchCntl($scope, $http) {
 		$scope.peopleMet.push(inPerson);
 	}
 
+	$scope.unmet = function (inIndex) {
+		$scope.peopleMet.splice(inIndex, 1);
+	}
+
+
 	// Create search URL by combining stem with an array of key/value pairs representing HTTP GET arguments
 	function getSearchURL(inParams) {
 		var searchURL = $scope.searchStem;
