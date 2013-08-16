@@ -50,11 +50,12 @@
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
                                     <button ng-click="search(searchString)" class="btn btn-default">Search</button>
+                                    (<a target='_blank' href='{{searchURL}}'>raw</a>)
                                 </div>
                             </div>                        
                         </form>
 
-                        <div><a target='_blank' href='{{searchURL}}'>RAW</a></div>
+                        <div></div>
                     </div>
 
                     <div class='col-md-6'>
@@ -67,12 +68,14 @@
                             </select>               
 
                         </div>
-                        <div ng-repeat='person in people | filter: {summit_location: summitLocation}'>
-                            <img ng-show='!person.photo' src='./icon-48.png' height='48px' />
+                        <hr />
+                        <div ng-repeat='person in people | filter: {summit_location: summitLocation}' style='padding-bottom: 1px'>
+                            <img ng-show='!person.photo' src='./person.jpg' height='48px' />
                             <img ng-show='person.photo' src='{{person.photo}}' height='48px' />
                             {{person.full_name}}
                             <strong>{{person.summit_location}}</strong>
                         </div>
+                        <hr />
                     </div>
                 </div>
             </div>
