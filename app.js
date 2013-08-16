@@ -57,6 +57,8 @@ function SearchCntl($scope, $http) {
 				var person = $scope.people[i];
 				if ($scope.locationMap[person.full_name]) {
 					person.summit_location = locationMap[person.full_name];
+				} else {
+					person.summit_location = 'Unknown';
 				}
 			}
 		}).error(function(data) {
