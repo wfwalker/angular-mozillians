@@ -9,14 +9,14 @@
     </head>
 
     <body style='padding-top: 70px'>
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-fixed-top">
             <div class="container">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">angular-mozillians</a>
+                <a class="navbar-brand" href="#">Mozilla Summit 2013</a>
                 <div class="nav-collapse collapse">
                   <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
@@ -81,8 +81,9 @@
                                 <img ng-show='!person.photo' src='./person.jpg' height='48px' />
                                 <img ng-show='person.photo' src='{{person.photo}}' height='48px' />
                             </div>
-                            <strong>{{person.full_name}}</strong>, {{person.summit_location}}
-                            <span class='badge' ng-repeat='skill in person.skills'>{{skill}}</span>
+                            <strong>{{person.full_name}}</strong>, {{person.title}}
+                            <br/>{{person.summit_location}}
+                            <span class='badge' ng-repeat='skill in person.skills|limitTo:3'>{{skill}}</span>
                             <br clear='all' />
                         </li>
                         </ul>
@@ -105,6 +106,7 @@
         <!-- JS code for this app -->
         <script src="apikey-real.js"></script>            
         <script src="locationMap-real.js"></script>            
+        <script src="titles.js"></script>            
         <script src="app.js"></script>            
 
     </body>

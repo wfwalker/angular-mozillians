@@ -45,6 +45,9 @@ function SearchCntl($scope, $http) {
 	// NOTE: this information is not public and is therefore withheld from this github repo.
 	$scope.locationMap = locationMap();
 
+	// Initialize the employee title map
+	$scope.titleMap = titles();
+
 	// Invoke the mozillians.org phonebook API, searching for people whose field has the specified value
 	// Upon getting back results, add summit_location field using the global locationMap
 	$scope.search = function(userName) {
@@ -64,10 +67,17 @@ function SearchCntl($scope, $http) {
 			// pre-process the search results, adding summit locations where possible
 			for (var i in $scope.people) {
 				var person = $scope.people[i];
+
 				if ($scope.locationMap[person.full_name]) {
 					person.summit_location = locationMap[person.full_name];
 				} else {
 					person.summit_location = 'Unknown';
+				}
+
+				if ($scope.titleMap[person.full_name]) {
+					person.title = $scope.titleMap[person.full_name];
+				} else {
+					person.title = 'Mozillian';
 				}
 			}
 		}).error(function(data) {
