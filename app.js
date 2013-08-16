@@ -6,7 +6,7 @@ function SearchCntl($scope, $http) {
 	$scope.appKey = getAPIKey();
 
 	// Initialize values for which fields of mozillians.org can be searched
-	$scope.fieldNames = [ 'ircname', 'city', 'email', 'skills', 'languages', 'country', 'groups' ];
+	$scope.fieldNames = [ 'ircname', 'city', 'region', 'email', 'skills', 'languages', 'country', 'groups' ];
 	$scope.searchField = 'city';
 	$scope.searchString = 'brighton';
 	$scope.searchedString = 'Look for some';
