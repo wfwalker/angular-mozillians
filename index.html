@@ -67,14 +67,17 @@
                                 <option value="">All</option>
                             </select>               
                         </div>
-                        <hr />
-                        <div ng-repeat='person in people | filter: {summit_location: summitLocation}' style='padding-bottom: 1px'>
-                            <img ng-show='!person.photo' src='./person.jpg' height='48px' />
-                            <img ng-show='person.photo' src='{{person.photo}}' height='48px' />
-                            {{person.full_name}}
-                            <strong>{{person.summit_location}}</strong>
-                        </div>
-                        <hr />
+                        <ul class='list-group'>
+                        <li class='list-group-item' ng-repeat='person in people | filter: {summit_location: summitLocation}'>
+                            <div style="float: left; padding-right: 10px; display: block">
+                                <img ng-show='!person.photo' src='./person.jpg' height='48px' />
+                                <img ng-show='person.photo' src='{{person.photo}}' height='48px' />
+                            </div>
+                            {{person.full_name}}, {{person.summit_location}}<br />
+                            {{person.bio}}
+                            <br clear='all' />
+                        </li>
+                        </ul>
                     </div>
                 </div>
             </div>
