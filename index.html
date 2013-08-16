@@ -59,13 +59,15 @@
                     </div>
 
                     <div class='col-md-6'>
-                        <div>
+                        <div class='panel'>
+                            <div class='panel-heading'>
                             {{searchedString}}
                             <span ng-show='meta.total_count==1'>person</span>
                             <span ng-show='meta.total_count!=1'>people</span>, view for 
                             <select ng-model="summitLocation" ng-options="summitLocation for summitLocation in summitLocations">
                                 <option value="">All</option>
-                            </select>               
+                            </select>   
+                            </div>            
                         </div>
                         <ul class='list-group'>
                         <li class='list-group-item' ng-repeat='person in people | filter: {summit_location: summitLocation}'>
@@ -73,8 +75,8 @@
                                 <img ng-show='!person.photo' src='./person.jpg' height='48px' />
                                 <img ng-show='person.photo' src='{{person.photo}}' height='48px' />
                             </div>
-                            {{person.full_name}}, {{person.summit_location}}<br />
-                            {{person.bio}}
+                            <strong>{{person.full_name}}</strong>, {{person.summit_location}}<br />
+                            <span class='badge' ng-repeat='skill in person.skills'>{{skill}}</span>
                             <br clear='all' />
                         </li>
                         </ul>
