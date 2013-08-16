@@ -31,7 +31,7 @@
             <div class='row'>
                 <div ng-controller="SearchCntl">
                     <div class='col-md-6'>
-                        <form role="form">
+                        <form role="form" class='panel panel-heading'>
                             <div class="form-group">
                                 <label for="searchField" class="control-label">Field</label>
                                 <div>
@@ -55,7 +55,10 @@
                             </div>                        
                         </form>
 
-                        <div></div>
+                        <h4>{{peopleMet.length}} people met</h4>
+                        <ul class='list-group'>
+                            <li class='list-group-item' ng-repeat='person in peopleMet'>{{person.full_name}}</li>
+                        </ul>
                     </div>
 
                     <div class='col-md-6'>
@@ -70,12 +73,12 @@
                             </div>            
                         </div>
                         <ul class='list-group'>
-                        <li class='list-group-item' ng-repeat='person in people | filter: {summit_location: summitLocation}'>
+                        <li ng-click='met(person)' class='list-group-item' ng-repeat='person in people | filter: {summit_location: summitLocation}'>
                             <div style="float: left; padding-right: 10px; display: block">
                                 <img ng-show='!person.photo' src='./person.jpg' height='48px' />
                                 <img ng-show='person.photo' src='{{person.photo}}' height='48px' />
                             </div>
-                            <strong>{{person.full_name}}</strong>, {{person.summit_location}}<br />
+                            <strong>{{person.full_name}}</strong>, {{person.summit_location}}
                             <span class='badge' ng-repeat='skill in person.skills'>{{skill}}</span>
                             <br clear='all' />
                         </li>
@@ -85,8 +88,8 @@
             </div>
         </div>
 
-        <script src="http://code.angularjs.org/1.2.0rc1/angular.min.js"></script>
-        <script src="http://code.angularjs.org/1.2.0rc1/angular-resource.min.js"></script>
+        <script src="./angularjs/js/angular.min.js"></script>
+        <script src="./angularjs/js/angular-resource.min.js"></script>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery.js"></script>

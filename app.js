@@ -10,6 +10,7 @@ function SearchCntl($scope, $http) {
 	$scope.searchField = 'city';
 	$scope.searchString = 'brighton';
 	$scope.searchedString = 'Look for some';
+	$scope.peopleMet = [];
 
 	// Initialize values for dynamic filtering of mozillians by summit location
 	$scope.summitLocations = [ 'Santa Clara', 'Toronto', 'Brussels' ];
@@ -20,6 +21,9 @@ function SearchCntl($scope, $http) {
 	// for API docs see https://wiki.mozilla.org/Mozillians/API-Specification/List_Users/
 	$scope.searchStem = 'https://mozillians.org/api/v1/users/?&limit=500&format=jsonp&callback=JSON_CALLBACK&app_name=' + $scope.appName + '&app_key=' + $scope.appKey;
 
+	$scope.met = function (inPerson) {
+		$scope.peopleMet.push(inPerson);
+	}
 
 	// Create search URL by combining stem with an array of key/value pairs representing HTTP GET arguments
 	function getSearchURL(inParams) {
