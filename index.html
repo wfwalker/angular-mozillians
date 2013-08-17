@@ -34,7 +34,6 @@
                         <form role="form" class='panel panel-heading'>
                             <div class="input-group">
                                 <div class='input-group-btn'>
-                                    <button class="btn btn-default" ng-click="search(searchString)" type='button'>Search</button>
                                     <button class='btn btn-default dropdown-toggle' tabindex='-1' data-toggle='dropdown' type='button'>{{searchField}} <span class='caret'></span></button>
                                     <ul class='dropdown-menu'>
                                         <li ng-repeat="fieldName in fieldNames">
@@ -42,7 +41,10 @@
                                         </li>
                                     </ul>      
                                 </div>
-                                <input type="text" class="form-control" id="searchString" ng-model="searchString" />         
+                                <input type="text" class="form-control" id="searchString" ng-model="searchString" />   
+                                <div class='input-group-btn'>
+                                    <button class="btn btn-default" ng-click="search(searchString)" type='button'>Search</button>
+                                </div>      
                             </div>
 
                         </form>
