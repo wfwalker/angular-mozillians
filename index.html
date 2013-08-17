@@ -72,8 +72,9 @@
                         <ul class='list-group'>
                         <li ng-click='met(person)' class='list-group-item' ng-repeat='person in people | filter: {summit_location: summitLocation}'>
                             <div style="float: left; padding-right: 10px; display: block">
-                                <img ng-show='!person.photo' src='./person.jpg' height='48px' />
                                 <img ng-show='person.photo' src='{{person.photo}}' height='48px' />
+                                <img ng-show='!person.photo' src='{{person.gravatar}}' height='48px' />
+                                <img ng-show='!person.gravatar' src='./person.jpg' height='48px' />
                             </div>
                             <strong>{{person.full_name}}</strong>, {{person.title}}
                             <br/>{{person.summit_location}}
@@ -88,6 +89,7 @@
 
         <script src="./angularjs/js/angular.min.js"></script>
         <script src="./angularjs/js/angular-resource.min.js"></script>
+        <script src='http://www.myersdaily.org/joseph/javascript/md5.js'></script>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery.js"></script>

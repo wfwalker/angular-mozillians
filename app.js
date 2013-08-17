@@ -72,6 +72,10 @@ function SearchCntl($scope, $http) {
 			for (var i in $scope.people) {
 				var person = $scope.people[i];
 
+				if (person.email) {
+					person.gravatar = 'http://www.gravatar.com/avatar/' + md5(person.email || '');
+				}
+
 				if ($scope.locationMap[person.full_name]) {
 					person.summit_location = locationMap[person.full_name];
 				} else {
