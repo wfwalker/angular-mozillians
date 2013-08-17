@@ -29,6 +29,10 @@ function SearchCntl($scope, $http) {
 		$scope.peopleMet.splice(inIndex, 1);
 	}
 
+	$scope.setSearchField = function(inString) {
+		$scope.searchField = inString;
+	}
+
 
 	// Create search URL by combining stem with an array of key/value pairs representing HTTP GET arguments
 	function getSearchURL(inParams) {
