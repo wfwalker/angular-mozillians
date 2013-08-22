@@ -19,7 +19,9 @@ function SearchCntl($scope, $http) {
 	// Initialize the stem of all searches for this API key and app name
 	// use JSONP to get around lack of CORS (see https://bugzilla.mozilla.org/show_bug.cgi?id=905672)
 	// for API docs see https://wiki.mozilla.org/Mozillians/API-Specification/List_Users/
-	$scope.searchStem = 'https://mozillians.org/api/v1/users/?&limit=500&format=jsonp&callback=JSON_CALLBACK&app_name=' + $scope.appName + '&app_key=' + $scope.appKey;
+
+	// $scope.searchStem = 'https://mozillians.org/api/v1/users/?&limit=500&format=jsonp&callback=JSON_CALLBACK&app_name=' + $scope.appName + '&app_key=' + $scope.appKey;
+	$scope.searchStem = '/mozillians?client=angular';
 
 	$scope.met = function (inPerson) {
 		$scope.peopleMet.push(inPerson);
@@ -61,7 +63,7 @@ function SearchCntl($scope, $http) {
     	$scope.searchURL = getSearchURL(params);
     	$scope.searchedString = 'Searching for '+ $scope.searchString + ' ' + $scope.searchField;
 
-	  	$http.jsonp($scope.searchURL).success(function(data) {
+	  	$http.get($scope.searchURL).success(function(data) {
 			console.log("SUCCESS");
 
 			$scope.searchedString = 'Found ' + data.meta.total_count + ' ' + $scope.searchString + ' ' + $scope.searchField;		
@@ -90,6 +92,7 @@ function SearchCntl($scope, $http) {
 			}
 		}).error(function(data) {
 			console.log("FAIL");
+			$scope.searchedString = 'Did not find ' + $scope.searchString + ' ' + $scope.searchField;					
 			console.log(data);
 		});    
 	}
