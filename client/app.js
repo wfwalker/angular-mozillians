@@ -2,8 +2,6 @@
 function SearchCntl($scope, $http) {
 	// initialize phonebook API key and app name.
 	// NOTE: you have to go get your own API key and keep it private.
-	$scope.appName = getAPIAppName();
-	$scope.appKey = getAPIKey();
 
 	// Initialize values for which fields of mozillians.org can be searched
 	$scope.fieldNames = [ 'ircname', 'city', 'region', 'email', 'skills', 'languages', 'country', 'groups', 'name' ];
@@ -21,7 +19,7 @@ function SearchCntl($scope, $http) {
 	// for API docs see https://wiki.mozilla.org/Mozillians/API-Specification/List_Users/
 
 	// $scope.searchStem = 'https://mozillians.org/api/v1/users/?&limit=500&format=jsonp&callback=JSON_CALLBACK&app_name=' + $scope.appName + '&app_key=' + $scope.appKey;
-	$scope.searchStem = '/mozillians?client=angular';
+	$scope.searchStem = '/realMozillians?client=angular';
 
 	$scope.met = function (inPerson) {
 		$scope.peopleMet.push(inPerson);
@@ -64,7 +62,7 @@ function SearchCntl($scope, $http) {
     	$scope.searchedString = 'Searching for '+ $scope.searchString + ' ' + $scope.searchField;
 
 	  	$http.get($scope.searchURL).success(function(data) {
-			console.log("SUCCESS");
+			console.log("SUCCESS " + data);
 
 			$scope.searchedString = 'Found ' + data.meta.total_count + ' ' + $scope.searchString + ' ' + $scope.searchField;		
 			$scope.people = data.objects;
