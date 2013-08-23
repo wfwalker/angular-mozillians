@@ -14,33 +14,6 @@ var app = express.createServer();
 app.use(express.cookieParser());
 app.use(express.session({secret: 'twegrergq25y345y245y'}));
 
-function respondWithProxiedJSON(request, response, inURL) {
-  backendURL = url.parse(inURL);
-  // parse the URL
-  console.log(inURL);
-
-  var options = {
-    host: backendURL.hostname,
-    headers: {accept: 'application/json, text/plain, */*'},
-    path: backendURL.path,
-    method: 'GET'
-  };
-
-  console.log("options");
-  console.log(options);
-
-  https.get(options, function(backendResponse) {
-    console.log("statusCode: ", backendResponse.statusCode);
-    console.log("headers: ", backendResponse.headers);   
-
-    backendResponse.on('data', function(data) {
-      console.log('data ' + data);
-      response.send(data);
-    });
-  });
-
-};
-
 app.use("/client", express.static('client'));
 
 app.get('/mozillians', function(request, response) {
@@ -60,10 +33,35 @@ app.get('/mozillians', function(request, response) {
 });
 
 app.get('/realmozillians', function(request, response) {
-	var searchStem = 'https://mozillians.org/api/v1/users/?&limit=500&format=json&app_name=' + apikey.getAPIAppName() + '&app_key=' + apikey.getAPIKey();
-	var searchURL = searchStem + '&city=brighton';
-  console.log(searchURL);
-	respondWithProxiedJSON(request, response, searchURL);
+  console.log("query ");
+  console.log(request.query);
+
+  var querystring = '';
+
+  for (var paramName in request.query) {
+    querystring += '&' + paramName + '=' + request.query[paramName];
+  }
+
+  var options = {
+    host: 'mozillians.org',
+    headers: {accept: 'application/json, text/plain, */*'},
+    path: 'https://mozillians.org/api/v1/users/?limit=500&format=json&app_name=' + apikey.getAPIAppName() + '&app_key=' + apikey.getAPIKey() + '&' + querystring,
+    method: 'GET'
+  };
+
+  console.log("options");
+  console.log(options);
+
+  https.get(options, function(backendResponse) {
+    console.log("statusCode: ", backendResponse.statusCode);
+    console.log("headers: ", backendResponse.headers);   
+
+    backendResponse.on('data', function(data) {
+      console.log('data ' + data);
+      response.send(data);
+    });
+  });
+
 });
 
 console.log("running");
