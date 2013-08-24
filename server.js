@@ -56,10 +56,14 @@ app.get('/realmozillians', function(request, response) {
     console.log("statusCode: ", backendResponse.statusCode);
     console.log("headers: ", backendResponse.headers);   
 
-    backendResponse.on('data', function(data) {
-      console.log('data ' + data);
-      response.send(data);
-    });
+     var data = [];
+     backendResponse.on('data', function(chunk) {
+       data.push(chunk);
+     });
+     backendResponse.on('end', function() {
+       var result = JSON.parse(data.join(''))
+       response.send(result);
+     });
   });
 
 });
