@@ -1,0 +1,9 @@
+name: angular-mozillians
+
+mem: 128M
+
+framework:
+  type: node
+
+processes:
+  web: node server.js
