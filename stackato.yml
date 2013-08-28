@@ -7,3 +7,5 @@ framework:
 
 processes:
   web: node server.js
+
+ignores: ["node_modules"]  
