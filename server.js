@@ -70,4 +70,7 @@ app.get('/realmozillians', function(request, response) {
 
 console.log("running");
 
-app.listen(8080);
+var myPort = process.env.PORT || 8080;
+var mHost = process.env.VCAP_APP_HOST || "127.0.0.1";
+
+app.listen(myPort);
